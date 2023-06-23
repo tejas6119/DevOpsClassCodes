@@ -1,23 +1,27 @@
-pipeline{
+pipeline {
     agent any
-    tools{
-        maven 'my_maven'
-    }
-    stages{
-        stage('Clone Repo'){
-            steps{
+        tools {
+            maven 'maven'
+        }
+
+    stages {
+        stage('Clone Repo') {
+            steps {
                 echo 'This is stage 1'
-                git 'https://github.com/NikitasGithub/DevOpsClassCodes.git'
+                git 'https://github.com/tejas6119/DevOpsClassCodes.git'
             }
         }
-        stage('Compile'){
-            steps{
-                echo 'This is compile stage'
+        
+         stage('Compile Stage') {
+            steps {
+                echo 'This is stage 2'
                 sh 'mvn compile'
             }
         }
-         stage('Code Review'){
-            steps{
+        
+          stage('Code Review Stage') {
+            steps {
+                echo 'This is stage 3'
                 sh 'mvn pmd:pmd'
             }
             post{
@@ -26,8 +30,10 @@ pipeline{
                 }
             }
         }
-          stage('Code Test'){
-            steps{
+        
+        stage('Code Test Stage') {
+            steps {
+                echo 'This is stage 4'
                 sh 'mvn test'
             }
             post{
@@ -36,10 +42,11 @@ pipeline{
                 }
             }
         }
-        stage('package'){
-            steps{
-                echo 'This is package stage'
-                sh 'mvn package'
+        
+        stage('Package Stage') {
+            steps {
+                echo 'This is stage 5'
+                sh ' mvn package'
             }
         }
     }
